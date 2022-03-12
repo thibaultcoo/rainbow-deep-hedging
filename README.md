@@ -1,5 +1,5 @@
 # rainbow-deep-hedging
 
-yo we just vibin here
+master's thesis project, an innovative model to hedge rainbow options
 
 inspired by https://github.com/YuMan-Tam/deep-hedging
