@@ -1,0 +1,77 @@
+research on the use of autocorrelation and volatility trading signals (read the paper and take notes, write on the thesis)
+&&&& - start chatting with Othmane about his internship at Melanion
+&&&& - send CV for Winter Internship at CS
+Python project for Sara (might want to use what we programmed last year)
+debug our current algo for Vanillas, as it does not produce coherent results yet
+one properly debugged, work on the extension of the algo for Rainbows (multi-asset options)
+&&&& - post my article on the twag (cacib gold trader fired for gross misconduct)
+send Anthony the econo exo
+start preparing hard for the interview (cv perfect, lm ready, start prepping questions and structuring my further research)
+&&&& - call avec maxime pour son entretien
+
+
+- call avec max
+
+chaque équipe: même role
+chaque équipe: un client
+lui: client banque privée
+amani: large retail
+
+missions avec amani différentes
+max: projets, il fait que coder et il fait des prix
+amani: elle fait des rep à des demandes de flow
+
+structuration: c'est bcp de code en général
+soit tu programme soit tu rep à de la demande
+
+programmation orientée objet liée aux librairies internes de sg
+pandas numpy classique
+
+faut chercher dans le code et trouver sans la doc (qui est rare)
+manipuler excel depuis python ça faut savoir faire
+
+pas de deadline sur les projets
+
+ils créent des nouveaux payoffs
+
+questions sur les produits / sensi / bsm
+ils lui avaient posé zéro question en python
+
+bcp de réplication
+questions pour prouver les sensi
+les sensi correl -> comment le prix de tes rainbow varie avec la correl de tes ssj
+est-ce que t'es long ou short correl sur un basket (ça dépend de la tendance)
+le prix d'un call avec vol infini: vega positif avec un cap donc tu montes jusqu'au cap et t'arrives au spot
+black-scholes: le fait qu'un call ATM ça a 0.5 delta
+raccourci pour avoir prix d'un call (kalife premier cours)
+
+pk le sien est mieux que celui d'amani: pas trop fan de son équipe
+ses flow sont pas tjrs ultra intéressants
+
+je peux contacter son maitre de stage
+ou son collègue qui revient que la semaine pro
+
+envoyer cv à 16h30 - 16h45
+quand il te demande des sensi qui sont dans le forward
+faut pas oublier qu'il faut les multiplier par le delta
+
+"quelle est la sensi taux d'un call"
+-> pourquoi ? -> quelles sont les dynamiques qui se chevauchent sur le taux sur un call
+-> les deux dyna: c'est le 1/discount (e(-rT)) et t'as aussi 2/rate qui est dans le forward
+-> quand le taux augmente c'est multiplié par le delta
+
+j'ai un call ATM: mon taux augmente de 1%
+-> de cb augmente mon prix
+-> faut gérer les deux param indep
+-> discount: e(-rT) -> avec T = 1 -> e(-r) avec dev lim
+-> avec le spot: t'as ton taux qu'est dans ton forward -> r + variation * r -> on multiplie par le delta
+
+il aime bien les développements limités
+moi il va m'en poser (mais c'est à coup d'exp(-r))
+
+il va m'envoyer les deux addresses mail
+tuteur revient lundi
+
+dans mon mail faut juste le cv
+pas forcément besoin de tout me présenter
+
