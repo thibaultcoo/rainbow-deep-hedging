@@ -68,8 +68,7 @@ class multiJumpDiffusion:
                 sigma1 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0, sigma1 ** 2),
                 0]
         elif val == 3:
-            jump = [0, sigma2 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0,
-                                                                                                              sigma2 ** 2)]
+            jump = [0, sigma2 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0,sigma2 ** 2)]
 
         return np.random.poisson(1 * self.T / self.N, size=2) * jump
 
