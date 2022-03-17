@@ -75,3 +75,41 @@ tuteur revient lundi
 dans mon mail faut juste le cv
 pas forcément besoin de tout me présenter
 
+
+todays note, interview stru (17/03)
+
+sensi rainbows (worst-of put)
+cross-gamma effect between the underlyings is very interesting
+as an underlying declines and takes the role of the worst of: we expect its delta to increase in abs value
+and at the same time the delta of the other ssj to decrease in abs value
+-> this is what we call a cross-gamma effect
+this cross-gamma sensi is more pronounced when forward price of the ssj are close to each other
+-> meaning that we are not sure which asset will end up as the worst-of)
+
+-> the more proba an ssj has to finish as the worst-of, the more the greeks will be allocated to this ssj
+
+sensi to volat:
+long worst-of put option = long volat
+
+sensi to correl:
+long worst-of put option = short correl
+-> higher dispersion leads to higher payoffs
+-> low correl would lead to more dispersed returns
+-> lower correl would therefore lead to higher payoffs for the worst-of put option
+
+reminder -> holder of wo/bo is long dispersion and therefore short correl and long volat (demander à nico)
+
+sensi to volat skew: dont understand
+sensi to correl skew: weird and depends on several parameters
+
+cega of worst-of put and best-of call
+-> long option = short correl
+
+cega of worst-of call and best-of put
+-> it depends
+-> here the position in volatility is not obvious as volatility has now two opposite effects on the option price
+-> 1/ volat increases the expected payoff of the option (classic as in vanillas)
+-> 2/ but it increases dispersion which lowers the forward level of the worst performing ssj: thus lowers price
+-> but most of the time the dispersion effect is dominant so that long option = long correl
+
+
