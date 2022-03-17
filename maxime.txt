@@ -113,3 +113,5 @@ cega of worst-of call and best-of put
 -> but most of the time the dispersion effect is dominant so that long option = long correl
 
 
+https://realpython.com/openpyxl-excel-spreadsheets-python/
+
