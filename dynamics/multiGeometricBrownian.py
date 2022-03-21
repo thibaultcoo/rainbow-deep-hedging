@@ -53,10 +53,10 @@ class multiGeometric:
         
         return dualPaths
     
-s0 = np.array([100,100])
-cov = np.array([[0.1, 0.05],[0.05, 0.2]])
+#s0 = np.array([100,100])
+#cov = np.array([[0.1, 0.05],[0.05, 0.2]])
     
-sto = multiGeometric(s0 = s0, T = 1, N = 30, cov = cov)
-spot = sto.gen_path(nbPaths = 3)
-path = sto.gen_process()
+#sto = multiGeometric(s0 = s0, T = 1, N = 30, cov = cov)
+#spot = sto.gen_path(nbPaths = 3)
+#path = sto.gen_process()
 # working fine

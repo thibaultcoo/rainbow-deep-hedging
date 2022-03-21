@@ -68,7 +68,8 @@ class multiJumpDiffusion:
                 sigma1 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0, sigma1 ** 2),
                 0]
         elif val == 3:
-            jump = [0, sigma2 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0,sigma2 ** 2)]
+            jump = [0, sigma2 * np.random.exponential() + np.sqrt(np.random.exponential()) * np.random.normal(0,
+                                                                                                              sigma2 ** 2)]
 
         return np.random.poisson(1 * self.T / self.N, size=2) * jump
 
@@ -82,14 +83,14 @@ class multiJumpDiffusion:
 
         return dualPaths
 
-m = np.array([0.1, 0.2])
-spot_init = np.array([100, 100])
-T = 1
-N = 30
-cov = np.array([[0.1, 0.05], [0.05, 0.1]])
-prob1 = 0.2
-prob2 = 0.2
+#m = np.array([0.1, 0.2])
+#spot_init = np.array([100, 100])
+#T = 1
+#N = 30
+#cov = np.array([[0.1, 0.05], [0.05, 0.1]])
+#prob1 = 0.2
+#prob2 = 0.2
 
-test = multiJumpDiffusion(m=m, spot_init=spot_init, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2)
-hihi = test.gen_path(1)
+#test = multiJumpDiffusion(m=m, spot_init=spot_init, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2)
+#hihi = test.gen_path(1)
 # working fine

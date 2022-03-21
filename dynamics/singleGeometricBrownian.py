@@ -27,11 +27,11 @@ class GeometricBrownianMotion:
     # function that generates a specific process
     def gen_process(self):
         
-        dt = np.divide(self.matu,self.N)
-        process = np.zeros(self.N)
+        dt = self.matu/self.N
+        process = np.zeros(self.N+1)
         process[0] = np.log(self.s0)
         
-        for i in range(1,self.N):
+        for i in range(1,self.N+1):
             z1 = np.random.normal(0,1)
             process[i] = process[i-1]-0.5*(self.sigma**2)*dt+self.sigma*np.sqrt(dt)*z1
         
@@ -40,8 +40,7 @@ class GeometricBrownianMotion:
     # function that loops through the afordefined to generate multiple paths
     def gen_path(self, nbPaths = None):
         
-        dt = np.divide(self.matu,self.N)
-        paths = np.zeros((nbPaths, self.N))
+        paths = np.zeros((nbPaths, self.N+1))
         
         for i in range(nbPaths):
             paths[i,:] = self.gen_process()

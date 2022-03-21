@@ -154,31 +154,31 @@ class EuropeanRainbow:
 
         return PnL_Stulz
 
-m = np.array([0.1, 0.1])
-spot_init = np.array([100, 100])
-T = 1
-N = 30
-cov = np.array([[0.1, 0.05], [0.05, 0.1]])
-prob1 = 0.3
-prob2 = 0.3
-r = 0.0
-K = 100
-matu = 1
-nbPaths = 1
-eps=0.0
-payoff_func = lambda x, y : -np.maximum(np.minimum(x-K, y-K), 0.0)
+#m = np.array([0.1, 0.1])
+#spot_init = np.array([100, 100])
+#T = 1
+#N = 30
+#cov = np.array([[0.1, 0.05], [0.05, 0.1]])
+#prob1 = 0.3
+#prob2 = 0.3
+#r = 0.0
+#K = 100
+#matu = 1
+#nbPaths = 1
+#eps=0.0
+#payoff_func = lambda x, y : -np.maximum(np.minimum(x-K, y-K), 0.0)
 
-test = multiGeometric(s0=spot_init, T=T, N=N, cov=cov)
-S = test.gen_path(nbPaths=nbPaths)
-payoff_final = payoff_func(S[:,-1,0],S[:,-1,1])
+#test = multiGeometric(s0=spot_init, T=T, N=N, cov=cov)
+#S = test.gen_path(nbPaths=nbPaths)
+#payoff_final = payoff_func(S[:,-1,0],S[:,-1,1])
 
-rainbow = EuropeanRainbow()
-price = rainbow.get_Stulz_price(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths)
-delta = rainbow.get_Stulz_delta(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths)
+#rainbow = EuropeanRainbow()
+#price = rainbow.get_Stulz_price(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths)
+#delta = rainbow.get_Stulz_delta(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths)
 
 # on a réussi à correctement pricer une option rainbow
 # il va nous rester cet aprem à étudier la fonction PnL
 # fonction codée pour le PnL, peut-être un poil chelou qu'on ait que des valeurs négatives mais wtv
 
-pnl = rainbow.get_Stulz_PnL(S=S, delta=delta, matu=matu, N=N,eps=eps, r=r, payoff=payoff_final,final_period_cost=False)
-print(pnl)
+#pnl = rainbow.get_Stulz_PnL(S=S, delta=delta, matu=matu, N=N,eps=eps, r=r, payoff=payoff_final,final_period_cost=False)
+#print(pnl)

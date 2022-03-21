@@ -16,15 +16,10 @@ def vanillaHedging(N = None, d = None, m = None, r = None, dt = None, init_w = N
     
     inputs = [price, info_set]
     
-    for j in range(N-1):
+    for j in range(N+1):
         if j < N:
             if strat_type == "simple":
                 helper1 = info_set
-            elif strat_type == "recurrent":
-                if j == 0:
-                    strat = Lambda(lambda x : x * 0.0)(price)
-                
-                helper1 = Concatenate()([info_set, strat])
             
             if not share_strat_across_time:
                 strat_layer = vanillaStratLayer(d = d, m = m, use_batch_norm = use_batch_norm, kernel_initializer = kernel_initializer, \
@@ -34,7 +29,7 @@ def vanillaHedging(N = None, d = None, m = None, r = None, dt = None, init_w = N
                 if j == 0:
                     strat_layer = vanillaStratLayer(d = d, m = m, use_batch_norm = use_batch_norm, kernel_initializer = kernel_initializer, \
                                              activation_dense = activation_dense, activation_output = activation_output, day = j)
-                
+
             stratHelper = strat_layer(helper1)
             
             if j == 0:
