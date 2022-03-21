@@ -115,3 +115,7 @@ cega of worst-of call and best-of put
 
 https://realpython.com/openpyxl-excel-spreadsheets-python/
 
+avancée globale au 21/03/2022
+je pense avoir trouvé le solution au problème global ->  mise à jour des packages a posé pb
+-> fonctionne avec l'algo de référence en Python 3.7 et Tensorflow 2.3.1
+
