@@ -1,0 +1,15 @@
+todays note, 23/03/2022
+
+https://escholarship.org/uc/item/52n659j4
+
+forecast correlation coefficient matrix of stock returns in portfolio analysis - feng zhao
+
+
+
+'--------------------
+
+questions à poser:
+
+je sais qu'une partie de votre travail consiste à créer de nouveaux payoffs -> de quoi vous vous servez concrètement pour faire cela
+est-ce que les stagiaires sont beaucoup en relation avec les quant pour une meilleure compréhension des fonctions et librairies internes utilisées
+est-ce que vous vous voyez faire ce que vous faites dans dix ans, sinon quoi d'autre ?
