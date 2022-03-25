@@ -13,3 +13,12 @@ questions à poser:
 je sais qu'une partie de votre travail consiste à créer de nouveaux payoffs -> de quoi vous vous servez concrètement pour faire cela
 est-ce que les stagiaires sont beaucoup en relation avec les quant pour une meilleure compréhension des fonctions et librairies internes utilisées
 est-ce que vous vous voyez faire ce que vous faites dans dix ans, sinon quoi d'autre ?
+
+
+questions à poser mais à amani:
+
+quelle est la relation avec les structureurs en tant que stagiaire ? est-ce un environnement plutot collaboratif ou alors très autonome
+que t'imagines-tu faire plus tard, et est-ce que ce stage aura fait évoluer cette vision ?
+qu'est ce qui te plait le plus dans ce que tu fais, et y'a-t'il quelque chose que tu aurais faire davantage ?
+quelle est la relation avec les autres équipes ? tu parles beaucoup avec les traders ou les sales ?
+comment tu évaluerai la part de ton travail entre programmation et traitement du flux
