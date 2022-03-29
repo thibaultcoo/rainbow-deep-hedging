@@ -148,8 +148,7 @@ class EuropeanWorstofTwoCall:
             
             return delta
 
-    def get_Stulz_PnL(self, S=None, payoff=None, delta=None, matu=None, r=None, \
-                      final_period_cost=None, eps=None, N=None):
+    def get_Stulz_PnL(self, S=None, payoff=None, delta=None, matu=None, r=None, eps=None, N=None, dt=None):
 
         # we compute the initial PnL
         PnL_Stulz = np.multiply(S[:, 0, 0], - delta[0, :, 0]) + np.multiply(S[:, 0, 1], - delta[1, :, 0])
@@ -167,7 +166,7 @@ class EuropeanWorstofTwoCall:
             PnL_Stulz *= np.exp(r * dt)
 
         # we compute the final PnL
-        PnL_Stulz += + np.multiply(S[:, N - 1, 0], delta[0, :, N - 2]) + np.multiply(S[:, N - 1, 1],delta[1, :,N - 2]) + payoff
+        PnL_Stulz += np.multiply(S[:, N - 1, 0], delta[0, :, N - 2]) + np.multiply(S[:, N - 1, 1],delta[1, :,N - 2]) + payoff
 
         return PnL_Stulz
 
