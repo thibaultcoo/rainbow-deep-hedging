@@ -61,16 +61,15 @@ class multiJumpDiffusion:
                     np.sqrt(np.random.exponential()) *
                     np.random.multivariate_normal(zero, self.cov))
         elif val == 2:
-            jump = [
-                sigma1 * np.random.exponential() +
-                np.sqrt(np.random.exponential()) *
-                np.random.normal(0, sigma1 ** 2),0]
+            jump = [sigma1 * np.random.exponential() +
+                   np.sqrt(np.random.exponential()) *
+                   np.random.normal(0, sigma1 ** 2),0]
         elif val == 3:
             jump = [0, sigma2 * np.random.exponential() +
-                    np.sqrt(np.random.exponential()) *
-                    np.random.normal(0,sigma2 ** 2)]
+                   np.sqrt(np.random.exponential()) *
+                   np.random.normal(0,sigma2 ** 2)]
 
-        return np.random.poisson(1 * self.dt, size=2) * jump
+        return np.sqrt(np.random.poisson(1 * self.dt, size=2)) * jump
 
     # function that loops through the afordefined to generate multiple paths
     def gen_path(self, nbPaths=None):
@@ -83,3 +82,26 @@ class multiJumpDiffusion:
         return dualPaths
 
 # should be good, not tested yet
+
+# testing session
+m = (0.01,0.01)
+s0 = (100,100)
+T = 1
+N = 30
+cov = np.zeros((2,2))
+prob1 = 0.4
+prob2 = 0.4
+dt = 1/30
+
+cov[0,0] = 0.1
+cov[1,1] = 0.08
+cov[0,1] = 0.04
+cov[1,0] = 0.04
+
+nbPaths = 1
+
+multiGeom = multiGeometric(s0=s0, T=T, N=N, cov=cov, dt=dt)
+spot = multiGeom.gen_process()
+path = multiGeom.gen_path(nbPaths=nbPaths)
+
+# working perfectly fine
