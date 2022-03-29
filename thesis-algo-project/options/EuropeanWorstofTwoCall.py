@@ -11,7 +11,7 @@ class EuropeanWorstofTwoCall:
     def get_Stulz_price(self, S=None, cov=None, r=None, K=None, matu=None,
                         N=None, nbPaths=None, dt=None):
 
-        T = np.arange(0, N) * dt
+        T = np.arange(0, (N + 1)) * dt
         T = np.repeat(np.flip(T[None, :]), S.shape[0], axis=0)
 
         spot1 = np.zeros((nbPaths, N + 1))
@@ -37,7 +37,7 @@ class EuropeanWorstofTwoCall:
         rho_indiv1 = (rho * sigma2 - sigma1) / np.sqrt(sig)
         rho_indiv2 = (rho * sigma1 - sigma2) / np.sqrt(sig)
 
-        price = np.zeros((nbPaths, N))
+        price = np.zeros((nbPaths, N + 1))
 
         with np.errstate(divide="ignore"):
             eta1 = np.divide(np.log(spot1 / K) +
@@ -65,9 +65,10 @@ class EuropeanWorstofTwoCall:
 
                 if price[j, i] < 0:
                     price[j, i] = 0
+                    
+            price[:,N] = np.maximum(0, np.minimum(spot1[:,N]-K, spot2[:,N]-K))
 
         return price
-        # looks very weird and not that efficient, might need a rework
 
     def get_Stulz_delta(self, S=None, cov=None, r=None, K=None, matu=None,
                         N=None, nbPaths=None, dt=None):
@@ -158,5 +159,22 @@ class EuropeanWorstofTwoCall:
 
         return PnL_Stulz
 
-# needs to be refined and tested
-# clearly dont think it works, dimensions are bad and need to be refined
+cov = np.zeros((2,2))
+r = 0.0
+K = 100
+matu = 1
+N = 30
+nbPaths = 2
+dt = 1/365
+
+cov[0,0] = 0.1
+cov[1,1] = 0.08
+cov[0,1] = 0.04
+cov[1,0] = 0.04
+
+S = multiGeometric(s0=(100,100),T=matu,N=N,cov=cov,dt=dt).gen_path(nbPaths=nbPaths)
+        
+option = EuropeanWorstofTwoCall()
+price = option.get_Stulz_price(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths, dt=dt)
+
+# price is working perfectly!
