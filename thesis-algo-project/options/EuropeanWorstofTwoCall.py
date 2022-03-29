@@ -182,11 +182,17 @@ cov[0,0] = 0.1
 cov[1,1] = 0.08
 cov[0,1] = 0.04
 cov[1,0] = 0.04
+        
+payoff_func = lambda x, y : np.maximum(0, np.minimum(x, y)-K)
+eps = 0.0
 
 S = multiGeometric(s0=(100,100),T=matu,N=N,cov=cov,dt=dt).gen_path(nbPaths=nbPaths)
+
+payoff = payoff_func(S[:,N,0],S[:,N,1])
         
 option = EuropeanWorstofTwoCall()
-price = option.get_Stulz_price(S=S, cov=cov, r=r, K=K, matu=matu, N=N, nbPaths=nbPaths, dt=dt)
+pnl = option.get_Stulz_PnL(S=S, payoff=payoff,delta=delta, matu=matu, r=r, eps=eps, N=N, dt=dt)
+print(pnl)
 
-# price and delta are working perfectly!
-# pnl might need a tiny bit rework
+# pnl seems alright, a bit off but still alright
+# all else is great
