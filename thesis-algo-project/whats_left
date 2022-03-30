@@ -9,3 +9,4 @@ on the main algo part for the moment, dont think we will touch layer generator (
 
 make some research on Heston calibration! (it would be so ideal to produce our own parameters)
 that is something we can do here at work
+Very well explained Heston calibration (paper sure, code maybe) : https://github.com/KNFO-MIMUW/Heston_model/tree/d41addfb99c4381a9200fdf9693cea62b6b03464
