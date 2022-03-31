@@ -16,3 +16,6 @@ optimization when confronted to multiple underlying options)
 
 https://machinelearningmastery.com/deep-learning-models-for-multi-output-regression/
 it appears simple and natively built in keras -> but still not completly sure it is the way to view the problem
+
+more math research on Heston calibration
+https://www.degruyter.com/document/doi/10.1515/math-2017-0058/html?lang=en
