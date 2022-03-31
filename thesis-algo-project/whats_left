@@ -10,3 +10,9 @@ on the main algo part for the moment, dont think we will touch layer generator (
 make some research on Heston calibration! (it would be so ideal to produce our own parameters)
 that is something we can do here at work
 Very well explained Heston calibration (paper sure, code maybe) : https://github.com/KNFO-MIMUW/Heston_model/tree/d41addfb99c4381a9200fdf9693cea62b6b03464
+
+need to make more research on the use of deep learning algo to support the production of two output parameters (i think it is the correct way to view the problem of
+optimization when confronted to multiple underlying options)
+
+https://machinelearningmastery.com/deep-learning-models-for-multi-output-regression/
+it appears simple and natively built in keras -> but still not completly sure it is the way to view the problem
