@@ -20,8 +20,9 @@ N = 30
 S0 = 100.0
 sigma = 0.2
 r = 0.0
+T = 1
 
-Ktrain = 1*(10**5)
+Ktrain = 1*(10**2)
 Ktest_ratio = 0.2
 
 strike = S0
@@ -53,32 +54,35 @@ xi = 0.2928
 rho = -0.7571
 
 #------------------------------------------------------------------------
-process_BS = GeometricBrownianMotion(s0 = S0, sigma = sigma, r = r, matu=1, N=30, dt=dt)
-#process_Heston = Heston(s0 = S0, v0 = v0, r = r, T = 1, N = 30, kappa = kappa,
+process_BS = GeometricBrownianMotion(s0 = S0, sigma = sigma, r = r, matu=T, N=N, dt=dt)
+#process_Heston = Heston(s0 = S0, v0 = v0, r = r, T = matu, N = N, kappa = kappa,
                         #theta = theta, xi = xi, rho = rho, dt = dt)
 
-spot_BS = process_BS.gen_path(nobs)
+spot_BS = process_BS.gen_path(nobs) # dim -> (120000, 31)
 #spot_Heston = process_Heston.gen_path(nobs)
 
 clear_output()
 #----------------------- preparing our data set -------------------------
-finalPayoff = payoff_call(spot_BS[:, -1])
-tradingSet =  np.stack((spot_BS), axis=1)
-infoSet =  np.stack((np.log(spot_BS / S0)), axis=1)
+finalPayoff = payoff_call(spot_BS[:, -1]) # dim -> (120000,)
+tradingSet =  np.stack((spot_BS), axis=1) # dim -> (31, 120000)
+infoSet =  np.stack((np.log(spot_BS / S0)), axis=1) # dim -> (31, 120000)
 
-x_all = []
+x_all = [] # dim -> (62, 120000, 1)
 for i in range(N+1):
   x_all += [tradingSet[i, :, None]]
   if i != N:
     x_all += [infoSet[i, :, None]]
 x_all += [finalPayoff[:, None]]
 
-test_size = int(Ktrain*Ktest_ratio)
-[x_train, x_test] = set_split_vanilla(x_all, test_size=test_size)
-[S_train, S_test] = set_split_vanilla([spot_BS], test_size=test_size)
-[payoff_train, payoff_test] = set_split_vanilla([x_all[-1]], test_size=test_size)
+test_size = int(Ktrain*Ktest_ratio) # 20000
+[x_train, x_test] = set_split_vanilla(x_all, test_size=test_size) # dim respectively -> (62, 100000, 1) (62, 20000, 1)
+[S_train, S_test] = set_split_vanilla([spot_BS], test_size=test_size) # dim respectively -> (1, 100000, 31) (1, 20000, 31)
+[payoff_train, payoff_test] = set_split_vanilla([x_all[-1]], test_size=test_size) # dim respectively -> (1, 100000, 1) (1, 20000, 1)
 #----------------------------------------------------------------------
 print("Finish preparing data!")
+
+print(np.shape(S_test[0])) # (20,31)
+print(np.shape(payoff_put(S_test[0][:, -1]))) # (20,)
 #--------------------- running the algorithm --------------------------
 optimizer = Adam(learning_rate=lr)
 

@@ -22,10 +22,10 @@ class multiGeometric:
 
         for i in range(1, self.N + 1):
             z1 = np.random.normal(0, 1)
-            sigma[0] = np.sqrt(cov[0, 0])
-            sigma[1] = np.sqrt(cov[1, 1])
+            sigma[0] = np.sqrt(self.cov[0, 0])
+            sigma[1] = np.sqrt(self.cov[1, 1])
 
-            drift = 0.5 * (sigma ** 2) * dt
+            drift = 0.5 * (sigma ** 2) * self.dt
 
             diffusion = np.sqrt(self.dt) * \
                         np.matmul(np.linalg.cholesky(self.cov),

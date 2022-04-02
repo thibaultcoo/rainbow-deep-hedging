@@ -81,8 +81,6 @@ class multiJumpDiffusion:
 
         return dualPaths
 
-# should be good, not tested yet
-
 # testing session
 m = (0.01,0.01)
 s0 = (100,100)
@@ -98,10 +96,10 @@ cov[1,1] = 0.08
 cov[0,1] = 0.04
 cov[1,0] = 0.04
 
-nbPaths = 1
+#nbPaths = 1
 
-multiGeom = multiGeometric(s0=s0, T=T, N=N, cov=cov, dt=dt)
-spot = multiGeom.gen_process()
-path = multiGeom.gen_path(nbPaths=nbPaths)
+#multiGeom = multiGeometric(s0=s0, T=T, N=N, cov=cov, dt=dt)
+#spot = multiGeom.gen_process()
+#path = multiGeom.gen_path(nbPaths=nbPaths)
 
 # working perfectly fine

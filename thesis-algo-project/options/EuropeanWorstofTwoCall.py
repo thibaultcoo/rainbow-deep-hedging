@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.stats as stats
 
-from dynamics.rainbowDyn import multiGeomBrownian
+from dynamics.rainbowDyn.multiGeomBrownian import multiGeometric
 from functions.bivariateNormal import bivnormcdf
 
 class EuropeanWorstofTwoCall:
@@ -130,9 +130,8 @@ class EuropeanWorstofTwoCall:
                                    np.sqrt(1 - rho_indiv1 ** 2))) * np.exp(-0.5 * beta2[j, i] * beta2[j, i]) * \
                                    (1 / np.sqrt(np.min(np.log((spot1), np.log(spot2)))))
  
-            # can we assume that the expiry delta of a rainbow option is the vanilla delta considering the worst ssj ?
-            # that seems very much correct! so we will implement that little tweak in order to have a final delta!
-
+            # little tweak: delta of a rainbow at expiry is the vanilla delta on
+            # the ITM underlying (so here the lowest performing one)
             delta = np.zeros(((2, nbPaths, N + 1)))
             
             if np.minimum(spot1[:,N], spot2[:,N]) == spot1[:,N]:
@@ -148,7 +147,8 @@ class EuropeanWorstofTwoCall:
             
             return delta
 
-    def get_Stulz_PnL(self, S=None, payoff=None, delta=None, matu=None, r=None, eps=None, N=None, dt=None):
+    def get_Stulz_PnL(self, S=None, payoff=None, delta=None, matu=None,
+                      r=None, eps=None, N=None, dt=None):
 
         # we compute the initial PnL
         PnL_Stulz = np.multiply(S[:, 0, 0], - delta[0, :, 0]) + np.multiply(S[:, 0, 1], - delta[1, :, 0])
@@ -183,16 +183,16 @@ cov[1,1] = 0.08
 cov[0,1] = 0.04
 cov[1,0] = 0.04
         
-payoff_func = lambda x, y : np.maximum(0, np.minimum(x, y)-K)
-eps = 0.0
+#payoff_func = lambda x, y : np.maximum(0, np.minimum(x, y)-K)
+#eps = 0.0
 
-S = multiGeometric(s0=(100,100),T=matu,N=N,cov=cov,dt=dt).gen_path(nbPaths=nbPaths)
+#S = multiGeometric(s0=(100,100),T=matu,N=N,cov=cov,dt=dt).gen_path(nbPaths=nbPaths)
 
-payoff = payoff_func(S[:,N,0],S[:,N,1])
+#payoff = payoff_func(S[:,N,0],S[:,N,1])
         
-option = EuropeanWorstofTwoCall()
-pnl = option.get_Stulz_PnL(S=S, payoff=payoff,delta=delta, matu=matu, r=r, eps=eps, N=N, dt=dt)
-print(pnl)
+#option = EuropeanWorstofTwoCall()
+#pnl = option.get_Stulz_PnL(S=S, payoff=payoff,delta=delta, matu=matu, r=r, eps=eps, N=N, dt=dt)
+#print(pnl)
 
 # pnl seems alright, a bit off but still alright
 # all else is great
