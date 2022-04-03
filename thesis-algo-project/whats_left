@@ -22,3 +22,8 @@ https://www.degruyter.com/document/doi/10.1515/math-2017-0058/html?lang=en
 
 initial citation for heston calibration
 https://perswww.kuleuven.be/~u0009713/ScSiTi03.pdf
+
+avancée au dimanche 03/04
+on bosse maintenant sur la vraie partie finale: créer un algo qui soit capable de process un input 2-dim et sortir un output à 2-dim (les deux param de delta-hedging)
+https://www.relataly.com/time-series-forecasting-multi-step-regression-using-neural-networks-with-multiple-outputs-in-python/5800/
+article qui m'a l'air vachement sympa sur le sujet
