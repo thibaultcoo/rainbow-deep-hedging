@@ -27,3 +27,12 @@ avancée au dimanche 03/04
 on bosse maintenant sur la vraie partie finale: créer un algo qui soit capable de process un input 2-dim et sortir un output à 2-dim (les deux param de delta-hedging)
 https://www.relataly.com/time-series-forecasting-multi-step-regression-using-neural-networks-with-multiple-outputs-in-python/5800/
 article qui m'a l'air vachement sympa sur le sujet
+
+# original two-dimensional output -> strat_helper of dimension (None, 2)
+
+delta_1, delta_2 = tf.split(strat_helper, num_or_size_splits=2, axis=1)
+
+# expected result of the split
+# delta_1 is of shape (None, 1)
+# delta_2 is of shape (None, 1)
+# and hopefully they can then be used
