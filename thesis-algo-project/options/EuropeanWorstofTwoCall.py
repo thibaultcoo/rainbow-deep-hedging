@@ -26,8 +26,8 @@ class EuropeanWorstofTwoCall:
         gamma1 = np.zeros((nbPaths, N + 1))
         gamma2 = np.zeros((nbPaths, N + 1))
 
-        spot1[:, :] = S[:, :, 0]
-        spot2[:, :] = S[:, :, 1]
+        spot1[:, :] = S[0, :, 0]
+        spot2[:, :] = S[0, :, 1]
 
         sigma1 = np.sqrt(cov[0, 0])
         sigma2 = np.sqrt(cov[1, 1])
@@ -88,8 +88,8 @@ class EuropeanWorstofTwoCall:
             gamma1 = np.zeros((nbPaths, N + 1))
             gamma2 = np.zeros((nbPaths, N + 1))
 
-            spot1[:, :] = S[:, :, 0]
-            spot2[:, :] = S[:, :, 1]
+            spot1[:, :] = S[0, :, 0]
+            spot2[:, :] = S[0, :, 1]
 
             sigma1 = np.sqrt(cov[0, 0])
             sigma2 = np.sqrt(cov[1, 1])

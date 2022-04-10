@@ -1,4 +1,4 @@
-from tensorflow.keras.layers import Dense, Activation, ReLU
+from tensorflow.keras.layers import Dense, Activation, ReLU, Concatenate
 from tensorflow.keras.initializers import he_uniform
 import tensorflow as tf
 
@@ -16,16 +16,21 @@ class stat_layer(tf.keras.layers.Layer):
         self.intermediate_dense = [None for _ in range(d)]
 
         for i in range(d):
-            self.intermediate_dense[i] = Dense(self.m, kernel_initializer=he_uniform(),
+            self.intermediate_dense[i] = Dense(self.m, kernel_initializer=he_uniform(), #input_dim = 2
                                                bias_initializer=he_uniform())
 
         self.output_dense = Dense(2, kernel_initializer=he_uniform(),
                                   bias_initializer=he_uniform())
 
     def call(self, input):
+
+        x1, x2 = input
+
+        x = Concatenate(axis=1)([x1, x2])
+
         for i in range(self.d):
             if i == 0:
-                output = self.intermediate_dense[i](input)
+                output = self.intermediate_dense[i](x)
             else:
                 output = self.intermediate_dense[i](output)
 

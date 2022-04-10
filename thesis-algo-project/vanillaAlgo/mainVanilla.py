@@ -22,7 +22,7 @@ sigma = 0.2
 r = 0.0
 T = 1
 
-Ktrain = 1*(10**2)
+Ktrain = 1*(10**5)
 Ktest_ratio = 0.2
 
 strike = S0
@@ -80,9 +80,6 @@ test_size = int(Ktrain*Ktest_ratio) # 20000
 [payoff_train, payoff_test] = set_split_vanilla([x_all[-1]], test_size=test_size) # dim respectively -> (1, 100000, 1) (1, 20000, 1)
 #----------------------------------------------------------------------
 print("Finish preparing data!")
-
-print(np.shape(S_test[0])) # (20,31)
-print(np.shape(payoff_put(S_test[0][:, -1]))) # (20,)
 #--------------------- running the algorithm --------------------------
 optimizer = Adam(learning_rate=lr)
 

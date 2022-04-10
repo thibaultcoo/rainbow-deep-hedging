@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from options.EuropeanWorstofTwoCall import EuropeanWorstofTwoCall
 from rainbowAlgo.rainbow_generalAlgo import rainbowModel
-from functions.losses import Entropy
+from functions.losses import Entropy, MSE
 from functions.splitRainbow import set_split_rainbow
 
 from dynamics.rainbowDyn.multiGeomBrownian import multiGeometric
@@ -27,7 +27,7 @@ cov[0,1] = 0.03
 cov[1,0] = 0.03
 r = 0.0
 
-Ktrain = 1*(10**2)
+Ktrain = 1*(10**4)
 Ktest_ratio = 0.2
 
 strike = np.mean(S0)
@@ -39,7 +39,7 @@ nb_hidden = 2
 
 lr = 0.001
 batch_size = 200
-epochs = 5
+epochs = 10
 kernel_initializer = "he_uniform"
 
 activation_dense = "relu"
@@ -54,11 +54,13 @@ prob1 = 0.20
 prob2 = 0.20
 
 #---------------------------------------------------------------------
-process_Geom = multiGeometric(s0=S0, T=T, N=N, cov=cov, dt=dt)
-#process_Kou = multiJumpDiffusion(m=m, s0=S0, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2, dt=dt)
+#process_Geom = multiGeometric(s0=S0, T=T, N=N, cov=cov, dt=dt)
+process_Kou = multiJumpDiffusion(m=m, s0=S0, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2, dt=dt)
 
-spot_Geom = process_Geom.gen_path(nobs) # dim -> (120000, 31, 2)
-#spot_Kou = process_Kou.gen_path(nobs)
+#spot_Geom = process_Geom.gen_path(nobs) # dim -> (120000, 31, 2)
+spot_Geom = process_Kou.gen_path(nobs)
+
+print(spot_Geom)
 
 clear_output()
 #---------------------------------------------------------------------
@@ -66,6 +68,7 @@ finalPayoff = payoff_rainbow(spot_Geom[:, -1, 0], spot_Geom[:, -1, 1]) # dim ->(
 tradingSet = np.stack((spot_Geom), axis=1) # dim -> (31, 120000, 2)
 infoSet = np.stack((np.log(spot_Geom / strike)), axis=1) # dim -> (31, 120000, 2)
 
+# partie en travaux ----------------------------------------------------------------------------------------
 x_all = [] # we would expect x_all to have such dim -> (62, 120000, 2)
 for i in range(N+1):
     for j in range(2):
@@ -74,10 +77,13 @@ for i in range(N+1):
             x_all += [infoSet[i, :, j, None]]
 x_all += [finalPayoff[:, None]]
 
+print(np.shape(x_all))
+
 test_size = int(Ktrain*Ktest_ratio)
 [x_train, x_test] = set_split_rainbow(x_all, test_size=test_size)
 [s_train, S_test] = set_split_rainbow([spot_Geom], test_size=test_size)
 [payoff_train, payoff_test] = set_split_rainbow([x_all[-1]], test_size=test_size)
+# fin de la partie en travaux ------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------
 print("Finish preparing data!")
@@ -88,7 +94,8 @@ doubleModel = rainbowModel(N=N, nb_neurons=nb_neurons, nb_hidden=nb_hidden+2, r=
                            kernel_initializer = kernel_initializer, activation_dense = activation_dense,
                            activation_output = activation_output)
 
-loss = Entropy(doubleModel.output, loss_param=1.0)
+#loss = Entropy(doubleModel.output, loss_param=1.0)
+loss = MSE(doubleModel.output)
 doubleModel.add_loss(loss)
 
 doubleModel.compile(optimizer=optimizer)
@@ -108,18 +115,18 @@ delta_Stulz = option.get_Stulz_delta(S=S_test[0], cov=cov, r=r, K=strike, matu=T
                                      N=N, nbPaths=1, dt=dt)
 
 PnL_Stulz = option.get_Stulz_PnL(S=S_test[0],
-                                 payoff=payoff_rainbow(payoff_rainbow(S_test[0][:, -1, 0], S_test[0][:, -1, 1])),
+                                 payoff=payoff_rainbow(S_test[0][:, -1, 0], S_test[0][:, -1, 1]),
                                  delta=delta_Stulz, matu=T, r=r, eps=eps, N=N, dt=dt)
 
-risk_neutral_price
-nn_simple_price = doubleModel.evaluate()
+risk_neutral_price = -payoff_test[0].mean() * np.exp(-r * (N * dt))
+nn_double_price = doubleModel.evaluate(x_test, batch_size=test_size, verbose=0)
 #----------------------------------------------------------------------
 print("The Stulz model price is %2.3f." % price_Stulz[0][0])
-print("The Risk Neutral price is %2.3f." % risk_neutral_price)
-print("The Deep Hedging price is %2.3f." % nn_simple_price)
+#print("The Risk Neutral price is %2.3f." % risk_neutral_price)
+print("The Deep Hedging price is %2.3f." % nn_double_price)
 #------------------- building the comparison graph --------------------
 bar1 = PnL_Stulz + price_Stulz[0][0]
-bar2 = doubleModel().numpy().squeeze() + price_Stulz[0][0]
+bar2 = doubleModel(x_test).numpy().squeeze() + price_Stulz[0][0]
 
 fig_PnL = plt.figure(dpi= 125, facecolor='w')
 ax = fig_PnL.add_subplot()

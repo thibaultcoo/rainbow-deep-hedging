@@ -11,3 +11,8 @@ def CVaR(wealth = None, w = None, loss_param = None):
 
     # Expected shortfall risk measure
     return K.mean(w + (K.maximum(-wealth-w,0)/(1.0-alpha)))
+
+def MSE(wealth=None):
+
+    # Mean squared error
+    return (1/200)*K.sum(K.square(wealth))
