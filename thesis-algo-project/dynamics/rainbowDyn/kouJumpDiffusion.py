@@ -100,21 +100,21 @@ cov[1,0] = 0.04
 
 nbPaths = 1
 
-multiGeom = multiJumpDiffusion(s0=s0, m=m, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2, dt=dt)
-spot = multiGeom.gen_process()
-path = multiGeom.gen_path(nbPaths=nbPaths)
+#multiGeom = multiJumpDiffusion(s0=s0, m=m, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2, dt=dt)
+#spot = multiGeom.gen_process()
+#path = multiGeom.gen_path(nbPaths=nbPaths)
 
-print(path)
+#path_1 = path[:,:,0]
+#path_2 = path[:,:,1]
 
-path_1 = path[:,:,0]
-path_2 = path[:,:,1]
+#plt.figure()
+#plt.plot(np.transpose(path_1), label = "asset 1", color="forestgreen", linewidth=3)
+#plt.plot(np.transpose(path_2), label = "asset 2", color="saddlebrown", linewidth=3)
+#plt.xlabel("Time", size = 15)
+#plt.ylabel("Spot", size = 15)
 
-plt.figure()
-plt.plot(np.transpose(path_1), label = "asset 1", color="forestgreen", linewidth=3)
-plt.plot(np.transpose(path_2), label = "asset 2", color="saddlebrown", linewidth=3)
-plt.xlabel("Time", size = 15)
-plt.ylabel("Spot", size = 15)
+#plt.show()
 
-plt.show()
+print("test")
 
 # working perfectly fine

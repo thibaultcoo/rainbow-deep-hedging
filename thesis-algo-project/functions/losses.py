@@ -15,4 +15,4 @@ def CVaR(wealth = None, w = None, loss_param = None):
 def MSE(wealth=None):
 
     # Mean squared error
-    return (1/200)*K.sum(K.square(wealth))
+    return (1/120000)*K.sum(K.square(wealth))

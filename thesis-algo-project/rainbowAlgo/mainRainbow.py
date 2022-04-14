@@ -27,7 +27,7 @@ cov[0,1] = 0.03
 cov[1,0] = 0.03
 r = 0.0
 
-Ktrain = 1*(10**4)
+Ktrain = 1*(10**5)
 Ktest_ratio = 0.2
 
 strike = np.mean(S0)
@@ -37,8 +37,8 @@ eps = 0.0
 nb_neurons = 25
 nb_hidden = 2
 
-lr = 0.001
-batch_size = 200
+lr = 0.005
+batch_size = 500
 epochs = 10
 kernel_initializer = "he_uniform"
 
@@ -57,19 +57,18 @@ prob2 = 0.20
 #process_Geom = multiGeometric(s0=S0, T=T, N=N, cov=cov, dt=dt)
 process_Kou = multiJumpDiffusion(m=m, s0=S0, T=T, N=N, cov=cov, prob1=prob1, prob2=prob2, dt=dt)
 
-#spot_Geom = process_Geom.gen_path(nobs) # dim -> (120000, 31, 2)
+#spot_Geom = process_Geom.gen_path(nobs)
 spot_Geom = process_Kou.gen_path(nobs)
 
 print(spot_Geom)
 
 clear_output()
 #---------------------------------------------------------------------
-finalPayoff = payoff_rainbow(spot_Geom[:, -1, 0], spot_Geom[:, -1, 1]) # dim ->(120000,)
-tradingSet = np.stack((spot_Geom), axis=1) # dim -> (31, 120000, 2)
-infoSet = np.stack((np.log(spot_Geom / strike)), axis=1) # dim -> (31, 120000, 2)
+finalPayoff = payoff_rainbow(spot_Geom[:, -1, 0], spot_Geom[:, -1, 1])
+tradingSet = np.stack((spot_Geom), axis=1)
+infoSet = np.stack((np.log(spot_Geom / strike)), axis=1)
 
-# partie en travaux ----------------------------------------------------------------------------------------
-x_all = [] # we would expect x_all to have such dim -> (62, 120000, 2)
+x_all = []
 for i in range(N+1):
     for j in range(2):
         x_all += [tradingSet[i, :, j, None]]
@@ -83,7 +82,6 @@ test_size = int(Ktrain*Ktest_ratio)
 [x_train, x_test] = set_split_rainbow(x_all, test_size=test_size)
 [s_train, S_test] = set_split_rainbow([spot_Geom], test_size=test_size)
 [payoff_train, payoff_test] = set_split_rainbow([x_all[-1]], test_size=test_size)
-# fin de la partie en travaux ------------------------------------------------------------------------------
 
 #----------------------------------------------------------------------
 print("Finish preparing data!")
@@ -122,7 +120,7 @@ risk_neutral_price = -payoff_test[0].mean() * np.exp(-r * (N * dt))
 nn_double_price = doubleModel.evaluate(x_test, batch_size=test_size, verbose=0)
 #----------------------------------------------------------------------
 print("The Stulz model price is %2.3f." % price_Stulz[0][0])
-#print("The Risk Neutral price is %2.3f." % risk_neutral_price)
+print("The Monte-Carlo price is %2.3f." % risk_neutral_price)
 print("The Deep Hedging price is %2.3f." % nn_double_price)
 #------------------- building the comparison graph --------------------
 bar1 = PnL_Stulz + price_Stulz[0][0]

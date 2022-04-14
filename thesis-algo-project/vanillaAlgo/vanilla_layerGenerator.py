@@ -16,7 +16,7 @@ class stat_layer(tf.keras.layers.Layer):
         self.intermediate_dense = [None for _ in range(d)]
 
         for i in range(d):
-            self.intermediate_dense[i] = Dense(self.m, kernel_initializer=he_uniform(),
+            self.intermediate_dense[i] = Dense(self.m, he_uniform(),
                                                bias_initializer=he_uniform())
 
         self.output_dense = Dense(1, kernel_initializer=he_uniform(),
