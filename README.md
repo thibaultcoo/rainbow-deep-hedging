@@ -1,6 +1,6 @@
 # Using Deep Learning to Hedge Rainbow Options
 
-### Written by Thibault Collin under the supervision of Prof. Thibaud Vienne and Prof. Gaëlle Le Fol.
+#### Written by Thibault Collin under the supervision of Prof. Thibaud Vienne and Prof. Gaëlle Le Fol.
 
 *A thesis sent in partial fulfilment of the MSc 203 - Financial Markets of Paris Dauphine PSL University.*
 
