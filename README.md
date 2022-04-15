@@ -1,4 +1,4 @@
-# rainbow-deep-hedging
+# Using Deep Learning to Hedge Rainbow Options
 
 master's thesis project, an innovative model to hedge rainbow options
 
