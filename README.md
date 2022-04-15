@@ -2,4 +2,4 @@
 
 A thesis sent in partial fulfilment of the MSc 203 - Financial Markets of Paris Dauphine PSL University.
 
-inspired by https://github.com/YuMan-Tam/deep-hedging
+(the algorithm was partly inspired by https://github.com/YuMan-Tam/deep-hedging)
