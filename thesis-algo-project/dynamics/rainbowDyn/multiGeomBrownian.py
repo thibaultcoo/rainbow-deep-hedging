@@ -44,5 +44,3 @@ class multiGeometric:
             dualPaths[i, :, :] = self.gen_process()
 
         return dualPaths
-
-# should be good, not tested yet

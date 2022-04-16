@@ -32,5 +32,3 @@ class GeometricBrownianMotion:
             paths[i, :] = self.gen_process()
 
         return paths
-
-# working fine

@@ -169,30 +169,3 @@ class EuropeanWorstofTwoCall:
         PnL_Stulz += np.multiply(S[:, N - 1, 0], delta[0, :, N - 2]) + np.multiply(S[:, N - 1, 1],delta[1, :,N - 2]) + payoff
 
         return PnL_Stulz
-
-cov = np.zeros((2,2))
-r = 0.0
-K = 100
-matu = 1
-N = 30
-nbPaths = 2
-dt = 1/365
-
-cov[0,0] = 0.1
-cov[1,1] = 0.08
-cov[0,1] = 0.04
-cov[1,0] = 0.04
-        
-#payoff_func = lambda x, y : np.maximum(0, np.minimum(x, y)-K)
-#eps = 0.0
-
-#S = multiGeometric(s0=(100,100),T=matu,N=N,cov=cov,dt=dt).gen_path(nbPaths=nbPaths)
-
-#payoff = payoff_func(S[:,N,0],S[:,N,1])
-        
-#option = EuropeanWorstofTwoCall()
-#pnl = option.get_Stulz_PnL(S=S, payoff=payoff,delta=delta, matu=matu, r=r, eps=eps, N=N, dt=dt)
-#print(pnl)
-
-# pnl seems alright, a bit off but still alright
-# all else is great

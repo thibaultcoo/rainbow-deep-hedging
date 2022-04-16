@@ -54,5 +54,3 @@ class Heston:
 sto = Heston(s0 = 100, v0 = 0.2, r = 0, T = 1, N = 30, kappa = 2, theta = 0.04, xi = 0.3, rho = 0.4, dt=1 / 365)
 spot = sto.gen_path(nbPaths = 2)
 path = sto.gen_process()
-
-# working fine
