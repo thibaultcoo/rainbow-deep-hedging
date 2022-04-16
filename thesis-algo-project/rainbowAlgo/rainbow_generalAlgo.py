@@ -1,5 +1,5 @@
 from tensorflow.keras.layers import Input, Subtract, Lambda
-from tensorflow.keras.layers import Add, Dot, Activation, LeakyReLU
+from tensorflow.keras.layers import Add, Dot, Activation
 from tensorflow.keras.models import Model # used to build the backbone of our algorithm
 from tensorflow.keras.initializers import he_uniform # method used to initialize our weights and biases (see chap3)
 import tensorflow.keras.backend as K # extension of numpy for tensors, allows basic and more complex operations
@@ -26,7 +26,7 @@ def rainbowModel(N = None, nb_neurons = None, nb_hidden = None,r = None, dt = No
 
             helper1 = info
 
-            # we generate our two delta-hedging parameters through the output each iteration of our model
+            # we generate our two delta-hedging parameters through the output for each iteration of our model
             layer = stat_layer(m=nb_neurons, d=nb_hidden, kernel_initializer=he_uniform(), day=j,
                                activation_dense=activation_dense, activation_output=activation_output)
 
@@ -66,8 +66,8 @@ def rainbowModel(N = None, nb_neurons = None, nb_hidden = None,r = None, dt = No
             w = Subtract(name="wealth_final_" + str(j))([w, mult_2])
 
             # we consider the fair value of our portfolio
-            FV_factor = np.exp(r * dt)
-            w = Lambda(lambda x: x * FV_factor)(w)
+            fair_value_factor = np.exp(r * dt)
+            w = Lambda(lambda x: x * fair_value_factor)(w)
 
             # we prepare the four input parameters that are to be used for the next iteration in our algorithm
             prc_1 = Input(shape=(1,), name="prc_1_" + str(j + 1))
