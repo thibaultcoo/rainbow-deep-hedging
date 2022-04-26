@@ -8,6 +8,6 @@ The scope of this thesis is to further study the application of deep learning te
 
 The complete paper is also available inside the repository (last overall update: April 23).
 
-The code can be used and modified by anyone freely. Download the whole repository and run the main programs (named *mainVanilla* and *MainRainbow*) under your favorite Python IDE !
+The code can be used and modified by anyone freely. Download the whole repository and run the main programs (named *mainVanilla* and *MainRainbow*) under your Python IDE.
 
 (the algorithm was partly inspired by https://github.com/YuMan-Tam/deep-hedging)
