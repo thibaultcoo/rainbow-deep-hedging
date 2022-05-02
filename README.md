@@ -10,6 +10,6 @@ The complete paper is also available inside the repository (last overall update:
 
 The code can be used and modified by anyone freely. Download the whole repository and run the main programs (named *mainVanilla* and *MainRainbow*) under your Python IDE.
 
-Versions for the different used (use latest version if not mentionned): Python 3.7 - Tensorflow 2.3.0 - Keras 2.3.1
+Versions for the libraries used (use latest version if not mentionned): Python 3.7 - Tensorflow 2.3.0 - Keras 2.3.1
 
 (the algorithm was partly inspired by https://github.com/YuMan-Tam/deep-hedging)
