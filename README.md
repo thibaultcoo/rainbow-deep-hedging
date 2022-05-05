@@ -4,7 +4,7 @@
 
 *A thesis sent in partial fulfilment of the MSc 203 - Financial Markets of Paris Dauphine PSL University.*
 
-The scope of this thesis is to further study the application of deep learning techniques in the context of **hedging financial derivatives relying on several underlyings**. This thesis demonstrates an ability of the algorithm to correctly replicate the hedging strategy for single-asset options under different dynamics, and illustrates some convergence for multi-asset derivatives under both regular and extreme market dynamics.
+The scope of this thesis is to further study the application of deep learning techniques in the context of **hedging financial derivatives relying on several underlyings**. Our research demonstrates an ability of the algorithm to correctly replicate the hedging strategy for single-asset options under different dynamics, and illustrates some convergence for multi-asset derivatives under both regular and extreme market dynamics.
 
 The complete paper is also available inside the repository (last overall update: April 23).
 
